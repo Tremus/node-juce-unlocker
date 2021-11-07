@@ -1,0 +1,23 @@
+{
+    "name": "node-juce-unlocker",
+    "version": "1.0.0",
+    "description": "Unlock your JUCE apps with Node.js",
+    "main": "example.js",
+    "dependencies": {
+        "node-addon-api": "^4.2.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "build": "node-gyp -j 16 build",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "install": "node-gyp rebuild"
+    },
+    "keywords": [
+        "node",
+        "JUCE",
+        "c++"
+    ],
+    "author": "Tremus",
+    "license": "ISC",
+    "gypfile": true
+}

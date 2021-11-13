@@ -7,12 +7,12 @@ Napi::String unlock(const Napi::CallbackInfo& info)
 {
     Napi::Env env = info.Env();
 
-    const juce::String app_name       (info[0].ToString());
-    const juce::String user_email     (info[1].ToString());
-    const juce::String username       (info[2].ToString());
-    const juce::String machine_number (info[3].ToString());
-    const juce::String expiry_time    (info[4].ToString());
-    const juce::String private_key    (info[5].ToString());
+    const juce::String app_name       ((std::string)info[0].ToString());
+    const juce::String user_email     ((std::string)info[1].ToString());
+    const juce::String username       ((std::string)info[2].ToString());
+    const juce::String machine_number ((std::string)info[3].ToString());
+    const juce::String expiry_time    ((std::string)info[4].ToString());
+    const juce::String private_key    ((std::string)info[5].ToString());
 
     const juce::String output = unlocker(app_name, user_email, username, machine_number, expiry_time, private_key);
 
@@ -23,8 +23,8 @@ Napi::String encrypt(const Napi::CallbackInfo& info)
 {
     Napi::Env env = info.Env();
 
-    const juce::String message (info[0].ToString());
-    const juce::String privkey (info[1].ToString());
+    const juce::String message ((std::string)info[0].ToString());
+    const juce::String privkey ((std::string)info[1].ToString());
     const auto output = encryptString(message, juce::RSAKey(privkey));
 
     return Napi::String::New(env, output.toStdString());
@@ -34,8 +34,8 @@ Napi::String decrypt(const Napi::CallbackInfo& info)
 {
     Napi::Env env = info.Env();
 
-    const juce::String encryptedMessage (info[0].ToString());
-    const juce::String pubkey           (info[1].ToString());
+    const juce::String encryptedMessage ((std::string)info[0].ToString());
+    const juce::String pubkey           ((std::string)info[1].ToString());
     const auto output = decryptString(encryptedMessage, juce::RSAKey(pubkey));
 
     return Napi::String::New(env, output.toStdString());

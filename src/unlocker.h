@@ -21,7 +21,7 @@ juce::String unlocker (const juce::String& app_name,       // name of the produc
         return juce::String();
     }
     // ensure private key is valid
-    if (! std::regex_match(private_key.toRawUTF8(), std::regex("^[0-9]+,[0-9]+$")))
+    if (! std::regex_match(private_key.toRawUTF8(), std::regex("^[0-9a-f]+,[0-9a-f]+$")))
     {
         std::cout << "Not a valid RSA key!" << std::endl;
         return juce::String();

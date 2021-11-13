@@ -1,5 +1,6 @@
 #include <napi.h>
 #include "unlocker.h"
+#include "crypto.h"
 
 
 Napi::String unlock(const Napi::CallbackInfo& info)
@@ -18,12 +19,42 @@ Napi::String unlock(const Napi::CallbackInfo& info)
     return Napi::String::New(env, output.toStdString());
 }
 
+Napi::String encrypt(const Napi::CallbackInfo& info)
+{
+    Napi::Env env = info.Env();
+
+    const juce::String message (info[0].ToString());
+    const juce::String privkey (info[1].ToString());
+    const auto output = encryptString(message, juce::RSAKey(privkey));
+
+    return Napi::String::New(env, output.toStdString());
+}
+
+Napi::String decrypt(const Napi::CallbackInfo& info)
+{
+    Napi::Env env = info.Env();
+
+    const juce::String encryptedMessage (info[0].ToString());
+    const juce::String pubkey           (info[1].ToString());
+    const auto output = decryptString(encryptedMessage, juce::RSAKey(pubkey));
+
+    return Napi::String::New(env, output.toStdString());
+}
+
 Napi::Object Init(Napi::Env env, Napi::Object exports)
 {
     // set a function
     exports.Set(
         Napi::String::New(env, "unlock"),
         Napi::Function::New(env, unlock)
+    );
+    exports.Set(
+        Napi::String::New(env, "encrypt"),
+        Napi::Function::New(env, encrypt)
+    );
+    exports.Set(
+        Napi::String::New(env, "decrypt"),
+        Napi::Function::New(env, decrypt)
     );
 
     return exports;

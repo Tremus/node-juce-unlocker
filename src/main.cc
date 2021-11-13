@@ -12,11 +12,11 @@ Napi::String unlock(const Napi::CallbackInfo& info)
     const juce::String username       ((std::string)info[2].ToString());
     const juce::String machine_number ((std::string)info[3].ToString());
     const juce::String expiry_time    ((std::string)info[4].ToString());
-    const juce::String private_key    ((std::string)info[5].ToString());
+    const juce::String privkey        ((std::string)info[5].ToString());
 
-    const juce::String output = unlocker(app_name, user_email, username, machine_number, expiry_time, private_key);
+    std::string output = unlocker(app_name, user_email, username, machine_number, expiry_time, privkey);
 
-    return Napi::String::New(env, output.toStdString());
+    return Napi::String::New(env, output);
 }
 
 Napi::String encrypt(const Napi::CallbackInfo& info)
@@ -25,9 +25,9 @@ Napi::String encrypt(const Napi::CallbackInfo& info)
 
     const juce::String message ((std::string)info[0].ToString());
     const juce::String privkey ((std::string)info[1].ToString());
-    const auto output = encryptString(message, juce::RSAKey(privkey));
+    std::string output (encryptString(message, juce::RSAKey(privkey)));
 
-    return Napi::String::New(env, output.toStdString());
+    return Napi::String::New(env, output);
 }
 
 Napi::String decrypt(const Napi::CallbackInfo& info)
@@ -36,9 +36,9 @@ Napi::String decrypt(const Napi::CallbackInfo& info)
 
     const juce::String encryptedMessage ((std::string)info[0].ToString());
     const juce::String pubkey           ((std::string)info[1].ToString());
-    const auto output = decryptString(encryptedMessage, juce::RSAKey(pubkey));
+    std::string output (decryptString(encryptedMessage, juce::RSAKey(pubkey)));
 
-    return Napi::String::New(env, output.toStdString());
+    return Napi::String::New(env, output);
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports)

@@ -59,6 +59,16 @@
                         'juce/JuceLibraryCode/include_juce_events.mm',
                         'juce/JuceLibraryCode/include_juce_product_unlocking.mm',
                     ],
+                    'link_settings': {
+                        'libraries': [
+                            '$(SDKROOT)/System/Library/Frameworks/Accelerate.framework',
+                            '$(SDKROOT)/System/Library/Frameworks/AudioToolbox.framework',
+                            '$(SDKROOT)/System/Library/Frameworks/AudioUnit.framework',
+                            '$(SDKROOT)/System/Library/Frameworks/Carbon.framework',
+                            '$(SDKROOT)/System/Library/Frameworks/Cocoa.framework',
+                            '$(SDKROOT)/System/Library/Frameworks/CoreAudio.framework',
+                        ],
+                    },
                 }],
                 ['OS!="mac"', {
                     "sources": [

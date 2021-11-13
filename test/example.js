@@ -1,4 +1,4 @@
-const unlocker = require('./build/Release/unlocker.node');
+const unlocker = require('node-juce-unlocker');
 
 // RSA KEY
 // BITS 1024

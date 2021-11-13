@@ -2,7 +2,7 @@
     "name": "node-juce-unlocker",
     "version": "1.0.0",
     "description": "Unlock your JUCE apps with Node.js",
-    "main": "example.js",
+    "main": "index.js",
     "dependencies": {
         "node-addon-api": "^4.2.0"
     },

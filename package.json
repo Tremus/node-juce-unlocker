@@ -2,14 +2,17 @@
     "name": "node-juce-unlocker",
     "version": "1.0.0",
     "description": "Unlock your JUCE apps with Node.js",
-    "main": "index.js",
+    "main": "lib/index.js",
+    "types": "lib",
     "dependencies": {
         "node-addon-api": "^4.2.0"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "@types/node": "^16.11.7"
+    },
     "scripts": {
-        "build": "node-gyp -j 16 build",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc -p .",
+        "test": "node test/example.js",
         "install": "node-gyp rebuild"
     },
     "keywords": [

@@ -1,6 +1,6 @@
 #include <juce_product_unlocking/juce_product_unlocking.h>
 
-extern "C" const char* encryptString (const juce::String& str, juce::RSAKey privateKey)
+std::string encryptString (const juce::String& str, juce::RSAKey privateKey)
 {
     juce::MemoryOutputStream text;
     text << str;
@@ -10,10 +10,10 @@ extern "C" const char* encryptString (const juce::String& str, juce::RSAKey priv
 
     privateKey.applyToValue (val);
 
-    return val.toString (16).toRawUTF8();
+    return val.toString (16).toStdString();
 }
 
-extern "C" const char* decryptString (juce::String hexData, juce::RSAKey rsaPublicKey)
+std::string decryptString (juce::String hexData, juce::RSAKey rsaPublicKey)
 {
     juce::BigInteger val;
     val.parseString (hexData, 16);
@@ -28,7 +28,7 @@ extern "C" const char* decryptString (juce::String hexData, juce::RSAKey rsaPubl
         auto mb = val.toMemoryBlock();
         //DBG("mb: " << mb.toString());
         if (juce::CharPointer_UTF8::isValidString (static_cast<const char*> (mb.getData()), (int) mb.getSize()))
-            return mb.toString().toRawUTF8();
+            return mb.toString().toStdString();
     }
     jassertfalse;
 

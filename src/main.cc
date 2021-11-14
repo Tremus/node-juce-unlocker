@@ -25,7 +25,7 @@ Napi::String encrypt(const Napi::CallbackInfo& info)
 
     const juce::String message ((std::string)info[0].ToString());
     const juce::String privkey ((std::string)info[1].ToString());
-    std::string output (encryptString(message, juce::RSAKey(privkey)));
+    std::string output = encryptString(message, juce::RSAKey(privkey));
 
     return Napi::String::New(env, output);
 }
@@ -36,7 +36,7 @@ Napi::String decrypt(const Napi::CallbackInfo& info)
 
     const juce::String encryptedMessage ((std::string)info[0].ToString());
     const juce::String pubkey           ((std::string)info[1].ToString());
-    std::string output (decryptString(encryptedMessage, juce::RSAKey(pubkey)));
+    std::string output = decryptString(encryptedMessage, juce::RSAKey(pubkey));
 
     return Napi::String::New(env, output);
 }
